@@ -20,16 +20,18 @@
     -webkit-transform: translate(-50%, -50%);
 }
 
-#earth:first-child
+@keyframes scaleAnim
 {
-    animation: earthAnim .5s ease-out forwards;
+    0% {transform: scale(0);}
+    75% {transform: scale(1.2);}
+    85% {transform: scale(1);}
+    95% {transform: scale(1.1);}
+    100% {transform: scale(1);}
 }
 
-@keyframes earthAnim
+#about
 {
-    0% {transform: scale(.5);}
-    80% {transform: scale(1.2)}
-    100% {transform: scale(1);}
+    animation: scaleAnim 1s ease 1.25s both;
 }
 
 #name
@@ -43,6 +45,7 @@
     color: white;
     animation: titleAnim 1s ease 1.25s both;
 }
+
 #name h1
 {
     font-size: 3rem;

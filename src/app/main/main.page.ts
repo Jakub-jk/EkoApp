@@ -12,7 +12,7 @@ export class MainPage implements OnInit {
 
   ngOnInit() {
     //console.log(info);
-    document.getElementById("info").innerText = info.default[Math.floor(Math.random() * Number(info.default[0])) + 1];
+    document.getElementById("info").innerText = info[Math.floor(Math.random() * Number(info[0])) + 1];
   }
 
 }

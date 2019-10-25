@@ -42,9 +42,11 @@ export class ScannerPage implements OnInit {
          console.log('Error', err);
      });
    }
-   loadData(ev)
+   async loadData(ev)
    {
-    this.loadItems(20, ev);
+    await this.loadItems(20, ev);
+    if (this.loaded >= await this.stor.length())
+      ev.target.disabled = true;
    }
 
    loadTemp()
@@ -147,7 +149,7 @@ export class ScannerPage implements OnInit {
 
   async loadItems(count: number, ev: any = undefined)
   {
-      
+      let actuallyLoaded: number = 0;
     await this.stor.forEach((val, key, num) => {
       console.log(`${val.Name} is ${val.CatName} with color #${val.Color}`);
       if (num > this.loaded && num < this.loaded + count)
@@ -171,11 +173,14 @@ export class ScannerPage implements OnInit {
           el.setAttribute('style', `--background: linear-gradient(to right, ${this.hexToRgbA(colors[0])} -50%, rgba(255, 255, 255, 0) 75%), linear-gradient(to left, ${this.hexToRgbA(colors[1])} -50%, rgba(255, 255, 255, 0) 75%) !important;`);
           el.addEventListener('click', () => this.navigate(key));
         document.querySelector('ion-list').appendChild(el);
+        actuallyLoaded++;
       }
     });
-    this.loaded += count;
+    this.loaded += actuallyLoaded;
+    console.log("Loaded: " + this.loaded);
+    
     if (ev !== undefined)
-      ev.complete();
+      ev.target.complete();
   }
 
   hexToRgbA(hex, a = 1){
@@ -209,18 +214,19 @@ export class ScannerPage implements OnInit {
           let colors = val.Color.split(";");
       if (colors.length == 1)
         colors.push("FFFFFF");
-      const el = document.createElement('ion-item');
+        const el = document.createElement('ion-item');
         el.innerHTML = `
           <ion-label>
-            <h2>${val.Name}</h2>
+            <h2 style="text-overflow: ellipsis; overflow:hidden; white-space:nowrap;">${val.Name}</h2>
             <p>${val.CatName}</p>
           </ion-label>
-          <ion-label slot="end" style="text-align: end; max-width: 30%; font-family: monospace;">
+          <ion-label slot="end" style="text-align: end; max-width: ${this.codeWidth}%; font-family: monospace; margin-left: 0;">
             <p>${val.Barcode}</p>
           </ion-label>
         `;
+          //el.setAttribute('style', `--background: linear-gradient(to right, ${this.hexToRgbA(colors[0])} -75%, ${this.hexToRgbA(colors[1], 0.5)} ${double ? "200" : "75"}%) !important;`);
           el.setAttribute('style', `--background: linear-gradient(to right, ${this.hexToRgbA(colors[0])} -50%, rgba(255, 255, 255, 0) 75%), linear-gradient(to left, ${this.hexToRgbA(colors[1])} -50%, rgba(255, 255, 255, 0) 75%) !important;`);
-          el.setAttribute('(click)', `navigate(${key})`);
+          el.addEventListener('click', () => this.navigate(key));
         document.querySelector('ion-list').appendChild(el);
         }
     });
