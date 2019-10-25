@@ -1,0 +1,60 @@
+.pgcontent
+{
+    --background: linear-gradient(45deg, #21284e, #2c2341) !important;
+}
+#particles-js
+{
+    width: 99%;
+    height: 97%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#earth
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0 auto;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+#earth:first-child
+{
+    animation: earthAnim .5s ease-out forwards;
+}
+
+@keyframes earthAnim
+{
+    0% {transform: scale(.5);}
+    80% {transform: scale(1.2)}
+    100% {transform: scale(1);}
+}
+
+#name
+{
+    position: absolute;
+    top: 0%;
+    margin: 10px auto;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    color: white;
+    animation: titleAnim 1s ease 1.25s both;
+}
+#name h1
+{
+    font-size: 3rem;
+}
+
+#name.ios
+{
+    padding-top: 20px;
+}
+
+@keyframes titleAnim
+{
+    from {opacity: 0; margin-top: 0px;}
+    to {opacity: 1; margin-top: 10px;}
+}

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button text="Powrót" defaultHref="/"></ion-back-button>
+        </ion-buttons>
+    <ion-title>EkoApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="appMain">
+  <ion-card button="true" [routerLink]="['/scanner']" style="background-color: transparent !important;">
+    <ion-card-header>
+      <ion-card-subtitle>Dotknij mnie!</ion-card-subtitle>
+      <ion-card-title>Segregacja śmieci</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        Jednym ze sposobów na ochronę naszej planety jest segregacja śmieci - wiele zużytych już opakowań i przedmiotów można przetworzyć na nowo. Nie zawsze wiemy jednak, jak prawidłowo je segregować. EkoApp może ci w tym pomóc!
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Ekociekawostka</ion-card-subtitle>
+        <ion-card-title>Czy wiesz że...</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content id="info">
+        Ekociekawostka
+      </ion-card-content>
+    </ion-card>
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/scanner']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+</ion-content>
